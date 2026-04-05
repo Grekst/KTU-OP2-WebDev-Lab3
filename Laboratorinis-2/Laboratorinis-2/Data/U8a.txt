@@ -1,0 +1,3 @@
+﻿Klaipėda, Šiauliai, 134
+Klaipėda, Panevėžys, 220
+Šiauliai, Panevėžys, 103
