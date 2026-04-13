@@ -1,17 +1,103 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Laboratorinis_3;
+using System;
+using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Laboratorinis_3
 {
-    public partial class Main : System.Web.UI.Page
+    public partial class Main : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e) { }
 
+        // ── failo įkėlimas naudojant kelią (TextBox) ──────────────────
+        protected void Btn_LoadByPath_Click(object sender, EventArgs e)
+        {
+            InOut.ClearMessage(lbl_Message);
+            try
+            {
+                string path1 = Server.MapPath(tb_FilePath1.Text.Trim());
+                string path2 = Server.MapPath(tb_FilePath2.Text.Trim());
+                tb_Roads.Text = InOut.ReadFileData(path1);
+                tb_Cities.Text = InOut.ReadFileData(path2);
+            }
+            catch (Exception ex)
+            {
+                InOut.ShowError("Klaida skaitant failą: " + ex.Message, lbl_Message);
+            }
+        }
+
+        // ── failo įkėlimas per FileUpload kontrolį ────────────────────
+        protected void Btn_UploadRoads_Click(object sender, EventArgs e)
+        {
+            UploadToTextBox(fu_Roads, tb_Roads);
+        }
+
+        protected void Btn_UploadCities_Click(object sender, EventArgs e)
+        {
+            UploadToTextBox(fu_Cities, tb_Cities);
+        }
+
+        private void UploadToTextBox(FileUpload fu, TextBox tb)
+        {
+            InOut.ClearMessage(lbl_Message);
+            if (!fu.HasFile)
+            {
+                InOut.ShowError("Failas nepasirinktas.", lbl_Message);
+                return;
+            }
+            using (StreamReader sr = new StreamReader(fu.FileContent))
+                tb.Text = sr.ReadToEnd();
+        }
+
+        // ── skaičiavimas ───────────────────────────────────────────────
+        protected void Btn_Calculate_Click(object sender, EventArgs e)
+        {
+            InOut.ClearMessage(lbl_Message);
+
+            LList<City> cities = InOut.ReadCities(tb_Cities);
+            LList<Road> roads = InOut.ReadRoads(tb_Roads);
+            string startCity = InOut.ReadText(tb_StartCity);
+            int maxPop = InOut.ReadInt(tb_MaxPopulation);
+            int minDist = InOut.ReadInt(tb_MinDistance);
+            string avoid = InOut.ReadText(tb_AvoidCity);
+
+            if (string.IsNullOrWhiteSpace(startCity) || maxPop == 0)
+            {
+                InOut.ShowError("Užpildykite pradinio miesto ir maks. populiacijos laukus.", lbl_Message);
+                return;
+            }
+
+            LList<Route> routes = TaskUtils.FindAllRoutes(cities, roads, startCity, maxPop, minDist, avoid);
+            TaskUtils.SortRoutes(routes);
+
+            InOut.DisplayRoutes(routes, lit_Results);
+        }
+
+        // ── pradinių duomenų išsaugojimas ─────────────────────────────
+        protected void Btn_SaveInitial_Click(object sender, EventArgs e)
+        {
+            InOut.ClearMessage(lbl_Message);
+            try
+            {
+                LList<City> cities = InOut.ReadCities(tb_Cities);
+                LList<Road> roads = InOut.ReadRoads(tb_Roads);
+
+                string filePath = Server.MapPath("~/Data/Pradiniai.txt");
+                InOut.SaveInitialData(
+                    roads, cities,
+                    InOut.ReadText(tb_StartCity),
+                    InOut.ReadInt(tb_MaxPopulation),
+                    InOut.ReadInt(tb_MinDistance),
+                    InOut.ReadText(tb_AvoidCity),
+                    filePath);
+
+                InOut.ShowError("Išsaugota: " + filePath, lbl_Message);
+            }
+            catch (Exception ex)
+            {
+                InOut.ShowError("Klaida: " + ex.Message, lbl_Message);
+            }
         }
     }
 }
