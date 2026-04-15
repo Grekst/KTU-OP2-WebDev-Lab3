@@ -3,9 +3,6 @@ using System.Text;
 
 namespace Laboratorinis_3
 {
-    /// <summary>
-    /// Represents a single travel route: an ordered list of cities and total distance.
-    /// </summary>
     public class Route
     {
         public LList<City> Cities { get; private set; }

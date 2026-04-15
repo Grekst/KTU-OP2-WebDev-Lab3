@@ -14,15 +14,9 @@
   <Class Name="Laboratorinis_3.InOut">
     <Position X="13.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAIIAAAAAAQMIFyQgQAAAAAAxiIAAQAABAIIAAE=</HashCode>
+      <HashCode>AAIAAAIIAAAAAAQEAByQgQAAAAAAxiIAAQAAAAIIAAE=</HashCode>
       <FileName>Other\InOut.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Main" />
-      <Property Name="Road" />
-      <Property Name="Route" />
-      <Property Name="City" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Laboratorinis_3.LList&lt;T&gt;">
     <Position X="10.25" Y="4.5" Width="1.5" />
@@ -76,15 +70,9 @@
   <Class Name="Laboratorinis_3.Main">
     <Position X="5.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAYAAAJEAAEAQJIkAIABAAIAAAEAADAA2EAAKABAA=</HashCode>
+      <HashCode>AAEAYAAABEAAEAQBAgAIABAAIAAAEAADAA2EAAKABAA=</HashCode>
       <FileName>Main.aspx.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="LList" />
-      <Property Name="Road" />
-      <Property Name="Route" />
-      <Property Name="City" />
-    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

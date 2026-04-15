@@ -2,10 +2,6 @@ using System;
 
 namespace Laboratorinis_3
 {
-    /// <summary>
-    /// Data class representing a road between two cities.
-    /// Implements IComparable&lt;Road&gt; (sort by Distance) and IEquatable&lt;Road&gt; (equality by both city names).
-    /// </summary>
     public class Road : IComparable<Road>, IEquatable<Road>
     {
         public string Start { get; private set; }
