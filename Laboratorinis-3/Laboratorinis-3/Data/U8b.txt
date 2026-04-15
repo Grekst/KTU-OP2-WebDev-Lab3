@@ -1,0 +1,16 @@
+Vilnius, 580000
+Kaunas, 290000
+Klaipeda, 145000
+Siauliai, 95000
+Panevezys, 85000
+Alytus, 50000
+Marijampole, 35000
+Kedainiai, 22000
+Telsiai, 20000
+Birzai, 12000
+Rokiskis, 14000
+Palanga, 15000
+Plunge, 19000
+Sakiai, 9000
+Radviliskis, 17000
+Druskininkai, 18000

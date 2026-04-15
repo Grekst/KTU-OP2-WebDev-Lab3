@@ -1,3 +1,4 @@
+using Laboratorinis_3;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,28 +7,27 @@ using System.Web.UI.WebControls;
 
 namespace Laboratorinis_3
 {
-    /// <summary>
-    /// The only class responsible for all input and output.
-    /// Display methods accept IEnumerable&lt;T&gt; — works with LList&lt;T&gt; or any collection.
-    /// </summary>
     public static class InOut
     {
-        // ══════════════════════════════════════════════════════════════
-        // FAILO SKAITYMAS
-        // ══════════════════════════════════════════════════════════════
-
-        /// <summary>Skaito failo turinį pagal kelią.</summary>
+        /// <summary>
+        /// Reads file data from path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string ReadFileData(string path)
         {
             using (StreamReader sr = new StreamReader(path, Encoding.UTF8))
+            {
                 return sr.ReadToEnd();
+            }
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // DUOMENŲ NUSKAITYMAS IŠ TextBox
-        // ══════════════════════════════════════════════════════════════
 
-        /// <summary>Nuskaito ir išanalizuoja miestų duomenis iš TextBox teksto.</summary>
+        /// <summary>
+        /// Reads city data from textbox
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <returns></returns>
         public static LList<City> ReadCities(TextBox tb)
         {
             LList<City> list = new LList<City>();
@@ -35,12 +35,18 @@ namespace Laboratorinis_3
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
+                {
                     TryAppendCity(line, list);
+                }
             }
             return list;
         }
 
-        /// <summary>Nuskaito ir išanalizuoja kelių duomenis iš TextBox teksto.</summary>
+        /// <summary>
+        /// Reads road data from textbox
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <returns></returns>
         public static LList<Road> ReadRoads(TextBox tb)
         {
             LList<Road> list = new LList<Road>();
@@ -48,69 +54,107 @@ namespace Laboratorinis_3
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
+                {
                     TryAppendRoad(line, list);
+                }
             }
             return list;
         }
 
-        public static string ReadText(TextBox tb) => tb.Text.Trim();
+        /// <summary>
+        /// A class used for trimming whitespaces from read text
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <returns></returns>
+        public static string ReadText(TextBox tb)
+        {
+            return tb.Text.Trim();
+        }
+
+        /// <summary>
+        /// Trims intagers from textboxes
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <returns></returns>
         public static int ReadInt(TextBox tb)
         {
             int val;
             return int.TryParse(tb.Text.Trim(), out val) ? val : 0;
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // REZULTATŲ RAŠYMAS Į UI — PRIIMA IEnumerable<T>
-        // ══════════════════════════════════════════════════════════════
-
         /// <summary>
-        /// Išveda maršrutų sąrašą į Literal kontrolį kaip HTML lentelę su CSS stiliais.
-        /// Priima IEnumerable&lt;Route&gt; — veikia su LList&lt;Route&gt; ar bet kokia kolekcija.
+        /// Prints the formatted route list
         /// </summary>
+        /// <param name="routes"></param>
+        /// <param name="output"></param>
         public static void DisplayRoutes(IEnumerable<Route> routes, Literal output)
         {
             output.Text = BuildRoutesTable(routes);
         }
 
         /// <summary>
-        /// Išveda miestų sąrašą į Literal kontrolį kaip HTML lentelę.
+        /// Outputs a formatted city list
         /// </summary>
+        /// <param name="cities"></param>
+        /// <param name="output"></param>
         public static void DisplayCities(IEnumerable<City> cities, Literal output)
         {
             output.Text = BuildCitiesTable(cities);
         }
 
         /// <summary>
-        /// Išveda kelių sąrašą į Literal kontrolį kaip HTML lentelę.
+        /// Outputs a formatted road list
         /// </summary>
+        /// <param name="roads"></param>
+        /// <param name="output"></param>
         public static void DisplayRoads(IEnumerable<Road> roads, Literal output)
         {
             output.Text = BuildRoadsTable(roads);
         }
 
-        /// <summary>Rašo klaidos pranešimą į Label.</summary>
+        /// <summary>
+        /// Prints errors into labels
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="lbl"></param>
         public static void ShowError(string message, Label lbl)
         {
             lbl.Text = message;
             lbl.CssClass = "msg-error";
         }
 
-        /// <summary>Išvalo pranešimo Label.</summary>
+        /// <summary>
+        /// Prints success into labels
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="lbl"></param>
+        public static void ShowSuccess(string message, Label lbl)
+        {
+            lbl.Text = message;
+            lbl.CssClass = "msg-success";
+        }
+
+        /// <summary>
+        /// Clears error labels
+        /// </summary>
+        /// <param name="lbl"></param>
         public static void ClearMessage(Label lbl)
         {
             lbl.Text = string.Empty;
             lbl.CssClass = string.Empty;
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // PRADINIŲ DUOMENŲ IŠSAUGOJIMAS Į FAILĄ
-        // ══════════════════════════════════════════════════════════════
 
         /// <summary>
-        /// Suformatuoja ir išsaugo pradinius duomenis į Pradiniai.txt.
-        /// Atsakomybė: tik formatavimas + rašymas į diską.
+        /// Formats and prints initial data into file
         /// </summary>
+        /// <param name="roads"></param>
+        /// <param name="cities"></param>
+        /// <param name="startCity"></param>
+        /// <param name="maxPop"></param>
+        /// <param name="minDist"></param>
+        /// <param name="avoidCity"></param>
+        /// <param name="filePath"></param>
         public static void SaveInitialData(
             IEnumerable<Road> roads,
             IEnumerable<City> cities,
@@ -124,6 +168,16 @@ namespace Laboratorinis_3
             File.WriteAllText(filePath, content, Encoding.UTF8);
         }
 
+        /// <summary>
+        /// A method used for formatting initial data into a table
+        /// </summary>
+        /// <param name="roads"></param>
+        /// <param name="cities"></param>
+        /// <param name="startCity"></param>
+        /// <param name="maxPop"></param>
+        /// <param name="minDist"></param>
+        /// <param name="avoidCity"></param>
+        /// <returns></returns>
         private static string FormatInitialData(
             IEnumerable<Road> roads,
             IEnumerable<City> cities,
@@ -169,10 +223,11 @@ namespace Laboratorinis_3
             return sb.ToString();
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // PRIVAČIOS HTML LENTELIŲ KŪRIMO FUNKCIJOS
-        // ══════════════════════════════════════════════════════════════
-
+        /// <summary>
+        /// Creates a table of routes
+        /// </summary>
+        /// <param name="routes"></param>
+        /// <returns></returns>
         private static string BuildRoutesTable(IEnumerable<Route> routes)
         {
             StringBuilder sb = new StringBuilder();
@@ -190,18 +245,32 @@ namespace Laboratorinis_3
                 string rowClass = nr % 2 == 0 ? "row-even" : "row-odd";
                 sb.AppendFormat(
                     "<tr class=\"{0}\"><td class=\"td-nr\">{1}</td><td class=\"td-route\">{2}</td><td class=\"td-dist\">{3}</td></tr>",
-                    rowClass, nr, HtmlEncode(RouteToPath(r)), r.TotalDistance);
+                    rowClass, nr, RouteToPath(r), r.TotalDistance);
             }
 
             if (!any)
+            {
                 sb.Append("<tr><td colspan=\"3\" class=\"td-empty\">Maršrutų nerasta.</td></tr>");
+            }
+
 
             sb.Append("</tbody></table>");
+
             if (any)
+            {
                 sb.AppendFormat("<p class=\"result-count\">Iš viso maršrutų: <strong>{0}</strong></p>", nr);
+            }
+
             return sb.ToString();
         }
 
+
+        /// <summary>
+        /// Creates a table of cities
+        /// 
+        /// </summary>
+        /// <param name="cities"></param>
+        /// <returns></returns>
         private static string BuildCitiesTable(IEnumerable<City> cities)
         {
             StringBuilder sb = new StringBuilder();
@@ -220,6 +289,11 @@ namespace Laboratorinis_3
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Creates a table of roads
+        /// </summary>
+        /// <param name="roads"></param>
+        /// <returns></returns>
         private static string BuildRoadsTable(IEnumerable<Road> roads)
         {
             StringBuilder sb = new StringBuilder();
@@ -238,6 +312,11 @@ namespace Laboratorinis_3
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Turns a route into a string and formats it for a table
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
         private static string RouteToPath(Route r)
         {
             StringBuilder sb = new StringBuilder();
@@ -245,50 +324,85 @@ namespace Laboratorinis_3
             foreach (City c in r.Cities)
             {
                 if (!first) sb.Append(" &rarr; ");
-                sb.Append(c.Name);
+                sb.Append(HtmlEncode(c.Name));
                 first = false;
             }
             return sb.ToString();
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // PRIVAČIOS ANALIZAVIMO FUNKCIJOS
-        // ══════════════════════════════════════════════════════════════
 
+        /// <summary>
+        /// Tries to append a city if criteria match
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="list"></param>
         private static void TryAppendCity(string line, LList<City> list)
         {
             if (string.IsNullOrWhiteSpace(line)) return;
+
             string[] p = line.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+
             if (p.Length < 2) return;
+
             int pop;
             if (int.TryParse(p[1].Trim(), out pop))
+            {
                 list.Append(new City(p[0].Trim(), pop));
+            }
         }
 
+        /// <summary>
+        /// Tries to append road if criteria match
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="list"></param>
         private static void TryAppendRoad(string line, LList<Road> list)
         {
             if (string.IsNullOrWhiteSpace(line)) return;
+
             string[] p = line.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+
             if (p.Length < 3) return;
+
             int dist;
             if (int.TryParse(p[2].Trim(), out dist))
+            {
                 list.Append(new Road(p[0].Trim(), p[1].Trim(), dist));
+            }
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // MAŽI PAGALBINIAI METODAI
-        // ══════════════════════════════════════════════════════════════
 
-        private static string Row(string label, string value) =>
-            string.Format("  {0,-26} {1}", label + ":", value);
+        /// <summary>
+        /// A method used for formatting table rows
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private static string Row(string label, string value)
+        {
+            return string.Format("  {0,-26} {1}", label + ":", value);
+        }
 
+        /// <summary>
+        /// A method used for formatting the center of the table
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="width"></param>
+        /// <returns></returns>
         private static string Center(string text, int width)
         {
             if (text.Length >= width) return text;
             return new string(' ', (width - text.Length) / 2) + text;
         }
 
-        private static string HtmlEncode(string s) =>
-            System.Web.HttpUtility.HtmlEncode(s ?? string.Empty);
+        /// <summary>
+        /// A method used for encoding strings for the table
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private static string HtmlEncode(string s)
+        {
+            return System.Web.HttpUtility.HtmlEncode(s ?? string.Empty);
+        }
     }
 }

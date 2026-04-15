@@ -10,7 +10,11 @@ namespace Laboratorinis_3
     {
         protected void Page_Load(object sender, EventArgs e) { }
 
-        // ── failo įkėlimas naudojant kelią (TextBox) ──────────────────
+        /// <summary>
+        /// File upload to textbox from path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_LoadByPath_Click(object sender, EventArgs e)
         {
             InOut.ClearMessage(lbl_Message);
@@ -38,19 +42,28 @@ namespace Laboratorinis_3
             UploadToTextBox(fu_Cities, tb_Cities);
         }
 
-        private void UploadToTextBox(FileUpload fu, TextBox tb)
+        /// <summary>
+        /// File upload to textbox from FileUpload component
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="textBox"></param>
+        private void UploadToTextBox(FileUpload file, TextBox textBox)
         {
             InOut.ClearMessage(lbl_Message);
-            if (!fu.HasFile)
+            if (!file.HasFile)
             {
                 InOut.ShowError("Failas nepasirinktas.", lbl_Message);
                 return;
             }
-            using (StreamReader sr = new StreamReader(fu.FileContent))
-                tb.Text = sr.ReadToEnd();
+            using (StreamReader sr = new StreamReader(file.FileContent))
+                textBox.Text = sr.ReadToEnd();
         }
 
-        // ── skaičiavimas ───────────────────────────────────────────────
+        /// <summary>
+        /// Calculation method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_Calculate_Click(object sender, EventArgs e)
         {
             InOut.ClearMessage(lbl_Message);
@@ -74,7 +87,11 @@ namespace Laboratorinis_3
             InOut.DisplayRoutes(routes, lit_Results);
         }
 
-        // ── pradinių duomenų išsaugojimas ─────────────────────────────
+        /// <summary>
+        /// Initial data upload button logic
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_SaveInitial_Click(object sender, EventArgs e)
         {
             InOut.ClearMessage(lbl_Message);
@@ -92,7 +109,7 @@ namespace Laboratorinis_3
                     InOut.ReadText(tb_AvoidCity),
                     filePath);
 
-                InOut.ShowError("Išsaugota: " + filePath, lbl_Message);
+                InOut.ShowSuccess("Išsaugota: " + filePath, lbl_Message);
             }
             catch (Exception ex)
             {

@@ -1,0 +1,62 @@
+﻿==============================================================
+                      PRADINIAI DUOMENYS
+                     2026-04-15 18:28:49
+==============================================================
+
+PARAMETRAI
+--------------------------------------------------------------
+  Pradinis miestas:          Kaunas
+  Maks. populiacija:         500000
+  Min. atstumas (km):        100
+  Nelankytinas miestas:      (nenurodytas)
+--------------------------------------------------------------
+
+KELIAI (U8a.txt)
+--------------------------------------------------------------
+  Miestas A              Miestas B              Km
+--------------------------------------------------------------
+  Vilnius                Kaunas                 102
+  Vilnius                Panevezys              154
+  Vilnius                Siauliai               214
+  Kaunas                 Klaipeda               212
+  Kaunas                 Siauliai               145
+  Kaunas                 Panevezys              130
+  Kaunas                 Alytus                 104
+  Kaunas                 Marijampole            80
+  Kaunas                 Kedainiai              58
+  Siauliai               Panevezys              103
+  Siauliai               Klaipeda               134
+  Siauliai               Telsiai                76
+  Panevezys              Birzai                 60
+  Panevezys              Rokiskis               74
+  Alytus                 Marijampole            60
+  Alytus                 Druskininkai           38
+  Marijampole            Sakiai                 39
+  Klaipeda               Palanga                30
+  Klaipeda               Telsiai                87
+  Telsiai                Plunge                 27
+  Kedainiai              Radviliskis            63
+  Birzai                 Rokiskis               54
+--------------------------------------------------------------
+
+MIESTAI (U8b.txt)
+--------------------------------------------------------------
+  Miestas                    Gyventojų
+--------------------------------------------------------------
+  Vilnius                    580 000
+  Kaunas                     290 000
+  Klaipeda                   145 000
+  Siauliai                   95 000
+  Panevezys                  85 000
+  Alytus                     50 000
+  Marijampole                35 000
+  Kedainiai                  22 000
+  Telsiai                    20 000
+  Birzai                     12 000
+  Rokiskis                   14 000
+  Palanga                    15 000
+  Plunge                     19 000
+  Sakiai                     9 000
+  Radviliskis                17 000
+  Druskininkai               18 000
+--------------------------------------------------------------

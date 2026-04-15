@@ -6,304 +6,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kelionių maršrutai</title>
-    <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            font-size: 14px;
-            background: #f0f2f5;
-            color: #222;
-            padding: 28px 32px;
-        }
-
-        .page-header {
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid #1a1a2e;
-        }
-
-            .page-header h1 {
-                font-size: 22px;
-                font-weight: 700;
-                color: #1a1a2e;
-            }
-
-            .page-header p {
-                margin-top: 4px;
-                font-size: 13px;
-                color: #666;
-            }
-
-        .card {
-            background: #fff;
-            border: 1px solid #dde1ea;
-            border-radius: 10px;
-            padding: 20px 24px;
-            margin-bottom: 18px;
-        }
-
-        .card-title {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            color: #888;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .grid-4 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 14px;
-        }
-
-        .field {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-            .field label {
-                font-size: 12px;
-                font-weight: 500;
-                color: #555;
-            }
-
-            .field input[type="text"],
-            .field textarea {
-                width: 100%;
-                border: 1px solid #ccd0d9;
-                border-radius: 6px;
-                padding: 7px 10px;
-                font-size: 13px;
-                font-family: inherit;
-                background: #fafbfc;
-                color: #222;
-                transition: border-color .15s, box-shadow .15s;
-            }
-
-                .field input[type="text"]:focus,
-                .field textarea:focus {
-                    outline: none;
-                    border-color: #4a6cf7;
-                    box-shadow: 0 0 0 3px rgba(74,108,247,.12);
-                    background: #fff;
-                }
-
-            .field textarea {
-                resize: vertical;
-                min-height: 130px;
-                font-family: 'Consolas', 'Courier New', monospace;
-                font-size: 12px;
-                line-height: 1.55;
-            }
-
-        .upload-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 4px;
-        }
-
-            .upload-row input[type="file"] {
-                font-size: 12px;
-                color: #555;
-                flex: 1;
-            }
-
-        .btn-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 16px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 18px;
-            border-radius: 6px;
-            border: 1px solid transparent;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background .15s;
-            line-height: 1;
-        }
-
-        .btn-primary {
-            background: #1a1a2e;
-            color: #fff;
-            border-color: #1a1a2e;
-        }
-
-            .btn-primary:hover {
-                background: #2d2d4e;
-            }
-
-        .btn-secondary {
-            background: #fff;
-            color: #333;
-            border-color: #ccd0d9;
-        }
-
-            .btn-secondary:hover {
-                background: #f4f5f8;
-            }
-
-        .btn-success {
-            background: #1e8c5a;
-            color: #fff;
-            border-color: #1e8c5a;
-        }
-
-            .btn-success:hover {
-                background: #197a4e;
-            }
-
-        .btn-sm {
-            padding: 5px 12px;
-            font-size: 12px;
-        }
-
-        .msg-error {
-            display: block;
-            margin-top: 12px;
-            padding: 9px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            background: #fff5f5;
-            border: 1px solid #fcd5d5;
-            color: #b91c1c;
-        }
-
-        .msg-success {
-            display: block;
-            margin-top: 12px;
-            padding: 9px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: #15803d;
-        }
-
-        /* ── rezultatų lentelė (generuojama InOut.cs) ── */
-        .result-wrap {
-            overflow-x: auto;
-        }
-
-        .result-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-            .result-table thead tr {
-                background: #1a1a2e;
-            }
-
-            .result-table thead th {
-                padding: 10px 14px;
-                text-align: left;
-                font-weight: 500;
-                color: #fff;
-                white-space: nowrap;
-            }
-
-                .result-table thead th:first-child {
-                    border-radius: 6px 0 0 0;
-                }
-
-                .result-table thead th:last-child {
-                    border-radius: 0 6px 0 0;
-                }
-
-            .result-table tbody td {
-                padding: 8px 14px;
-                border-bottom: 1px solid #f0f0f0;
-                vertical-align: middle;
-            }
-
-        .row-odd {
-            background: #fff;
-        }
-
-        .row-even {
-            background: #f8f9ff;
-        }
-
-            .row-odd:hover, .row-even:hover {
-                background: #eef1ff;
-            }
-
-        .td-nr {
-            width: 52px;
-            text-align: center;
-            color: #aaa;
-            font-size: 12px;
-        }
-
-        .td-route {
-            color: #1a1a2e;
-        }
-
-        .td-dist {
-            text-align: right;
-            font-weight: 600;
-            color: #4a6cf7;
-            white-space: nowrap;
-        }
-
-        .td-empty {
-            text-align: center;
-            padding: 28px;
-            color: #aaa;
-            font-style: italic;
-        }
-
-        .result-count {
-            margin-top: 10px;
-            font-size: 13px;
-            color: #666;
-        }
-
-            .result-count strong {
-                color: #1a1a2e;
-            }
-
-        .result-placeholder {
-            text-align: center;
-            padding: 40px 20px;
-            color: #bbb;
-            font-size: 13px;
-        }
-    </style>
+    <link rel="stylesheet" href="StyleSheet1.css" />
 </head>
 <body>
     <form id="form1" runat="server">
 
-        <div class="page-header">
-            <h1>Kelionių maršrutai po Lietuvą</h1>
-            <p>Randa visus tinkamus maršrutus pagal populiacijos ir atstumo filtrus</p>
-        </div>
 
-        <!-- ══ 1. Duomenų įkėlimas ══════════════════════════════════════════ -->
+        <!-- Pradiniai duomenys -->
         <div class="card">
-            <div class="card-title">Duomenų šaltinis</div>
+            <div class="card-title">Pradiniai duomenys</div>
             <div class="grid-2">
 
                 <div>
@@ -311,11 +22,13 @@
                         <label>Keliai — failo kelias (U8a.txt):</label>
                         <asp:TextBox ID="tb_FilePath1" runat="server" Text="~/Data/U8a.txt" />
                     </div>
+
                     <div class="upload-row">
                         <asp:FileUpload ID="fu_Roads" runat="server" />
                         <asp:Button ID="Btn_UploadRoads" runat="server" Text="Įkelti"
                             CssClass="btn btn-secondary btn-sm" OnClick="Btn_UploadRoads_Click" />
                     </div>
+
                     <div class="field" style="margin-top: 12px">
                         <label>Kelių duomenys (redaguojami):</label>
                         <asp:TextBox ID="tb_Roads" runat="server" TextMode="MultiLine" Rows="9"
@@ -328,11 +41,13 @@
                         <label>Miestai — failo kelias (U8b.txt):</label>
                         <asp:TextBox ID="tb_FilePath2" runat="server" Text="~/Data/U8b.txt" />
                     </div>
+
                     <div class="upload-row">
                         <asp:FileUpload ID="fu_Cities" runat="server" />
                         <asp:Button ID="Btn_UploadCities" runat="server" Text="Įkelti"
                             CssClass="btn btn-secondary btn-sm" OnClick="Btn_UploadCities_Click" />
                     </div>
+
                     <div class="field" style="margin-top: 12px">
                         <label>Miestų duomenys (redaguojami):</label>
                         <asp:TextBox ID="tb_Cities" runat="server" TextMode="MultiLine" Rows="9"
@@ -347,7 +62,7 @@
             </div>
         </div>
 
-        <!-- ══ 2. Parametrai ════════════════════════════════════════════════ -->
+        <!-- Parametrai -->
         <div class="card">
             <div class="card-title">Parametrai</div>
             <div class="grid-4">
@@ -355,29 +70,34 @@
                     <label>Pradinis miestas:</label>
                     <asp:TextBox ID="tb_StartCity" runat="server" placeholder="pvz. Kaunas" />
                 </div>
+
                 <div class="field">
                     <label>Maks. populiacija:</label>
                     <asp:TextBox ID="tb_MaxPopulation" runat="server" placeholder="pvz. 500000" />
                 </div>
+
                 <div class="field">
                     <label>Min. atstumas (km):</label>
                     <asp:TextBox ID="tb_MinDistance" runat="server" placeholder="pvz. 100" />
                 </div>
+
                 <div class="field">
                     <label>Nelankytinas miestas:</label>
                     <asp:TextBox ID="tb_AvoidCity" runat="server" placeholder="pvz. Alytus" />
                 </div>
+
             </div>
             <div class="btn-row">
                 <asp:Button ID="Btn_Calculate" runat="server" Text="Ieškoti maršrutų"
                     CssClass="btn btn-primary" OnClick="Btn_Calculate_Click" />
+
                 <asp:Button ID="Btn_SaveInitial" runat="server" Text="Išsaugoti Pradiniai.txt"
                     CssClass="btn btn-success" OnClick="Btn_SaveInitial_Click" />
             </div>
             <asp:Label ID="lbl_Message" runat="server" />
         </div>
 
-        <!-- ══ 3. Rezultatai ════════════════════════════════════════════════ -->
+        <!-- Rezultatai -->
         <div class="card">
             <div class="card-title">Rezultatai</div>
             <div class="result-wrap">

@@ -2,10 +2,6 @@ using System;
 
 namespace Laboratorinis_3
 {
-    /// <summary>
-    /// Data class representing a city.
-    /// Implements IComparable&lt;City&gt; (sort by Name) and IEquatable&lt;City&gt; (equality by Name).
-    /// </summary>
     public class City : IComparable<City>, IEquatable<City>
     {
         public string Name { get; set; }
@@ -19,28 +15,54 @@ namespace Laboratorinis_3
             Population = population;
         }
 
-        // ── IComparable<City> ──────────────────────────────────────────
-        /// <summary>Lygina miestus pagal pavadinimą (abėcėlės tvarka).</summary>
+        /// <summary>
+        /// Compares city names by alphabet order
+        /// </summary>
+        /// <param name="other">The other city to compare to</param>
+        /// <returns></returns>
         public int CompareTo(City other)
         {
             if (other == null) return 1;
+
             return string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
         }
 
-        // ── IEquatable<City> ───────────────────────────────────────────
-        /// <summary>Lygybė pagal pavadinimą (case-insensitive).</summary>
+        /// <summary>
+        /// Checks if city names match
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(City other)
         {
             if (other == null) return false;
+
             return string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase);
         }
 
-        public override bool Equals(object obj) => Equals(obj as City);
+        /// <summary>
+        /// Override for the equals method
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as City);
+        }
 
-        public override int GetHashCode() =>
-            Name == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(Name);
+        public override int GetHashCode()
+        {
+            return Name == null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(Name);
+        }
 
-        public override string ToString() =>
-            string.Format("{0} ({1} gyv.)", Name, Population.ToString("N0"));
+
+        /// <summary>
+        /// String override for formatting cities in tables
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return string.Format("{0} ({1} gyv.)", Name, Population.ToString("N0"));
+        }
+
     }
 }

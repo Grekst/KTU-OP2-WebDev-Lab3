@@ -67,12 +67,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Pradiniai.txt" />
+    <Content Include="Data\U8a.txt" />
+    <Content Include="Data\U8b.txt" />
     <Content Include="Main.aspx" />
+    <Content Include="StyleSheet1.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="City\City.cs" />
-    <Compile Include="Data\LList.cs" />
+    <Compile Include="Other\LList.cs" />
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

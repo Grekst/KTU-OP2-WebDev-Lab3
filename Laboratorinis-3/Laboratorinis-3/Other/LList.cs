@@ -4,14 +4,8 @@ using System.Collections.Generic;
 
 namespace Laboratorinis_3
 {
-    /// <summary>
-    /// Generic singly-linked list with sentinel head and tail nodes.
-    /// Implements IEnumerable&lt;T&gt; so it can be used in foreach loops
-    /// and passed to any method accepting IEnumerable&lt;T&gt;.
-    /// </summary>
     public sealed class LList<T> : IEnumerable<T>
     {
-        // ── mazgo klasė ───────────────────────────────────────────────
         private sealed class Node
         {
             public T Data { get; set; }
@@ -19,13 +13,14 @@ namespace Laboratorinis_3
             public Node(T data, Node link) { Data = data; Link = link; }
         }
 
-        // ── laukai ────────────────────────────────────────────────────
         private readonly Node head;
         private readonly Node tail;
-        private Node headFifo;  // paskutinis įterptas elementas
-        private Node current;   // iteratoriaus rodyklė
+        private Node headFifo;  // Last inserted element
+        private Node current;   // Pointer
 
-        // ── konstruktorius ────────────────────────────────────────────
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public LList()
         {
             tail = new Node(default(T), null);
@@ -34,27 +29,33 @@ namespace Laboratorinis_3
             current = null;
         }
 
-        // ── CQS komandos (keičia būseną, nieko negrąžina) ─────────────
-
-        /// <summary>Prideda elementą į sąrašo galą.</summary>
+        /// <summary>
+        /// Appends an element into the back of the list
+        /// </summary>
+        /// <param name="item"></param>
         public void Append(T item)
         {
             headFifo.Link = new Node(item, tail);
             headFifo = headFifo.Link;
         }
 
-        /// <summary>Nustate iteratorių į pradžią.</summary>
+        /// <summary>
+        /// Sets the pointer to the start
+        /// </summary>
         public void Begin() { current = head.Link; }
 
-        /// <summary>Perkelia iteratorių į kitą elementą.</summary>
+        /// <summary>
+        /// Moves the pointer to the next element
+        /// </summary>
         public void Next() { current = current.Link; }
 
-        /// <summary>Išsaugo iteratoriaus poziciją (rekursijai).</summary>
         private Node saved;
         public void SavePosition() { saved = current; }
         public void RestorePosition() { current = saved; }
 
-        /// <summary>Pašalina paskutinį elementą (backtracking).</summary>
+        /// <summary>
+        /// Removes the last element
+        /// </summary>
         public void RemoveLast()
         {
             if (head.Link == tail) return;
@@ -64,21 +65,31 @@ namespace Laboratorinis_3
             headFifo = temp;
         }
 
-        // ── CQS užklausos (neskeičia būsenos, grąžina reikšmę) ────────
-
-        /// <summary>Tikrina ar iteratorius dar turi elementų.</summary>
+        /// <summary>
+        /// Check if pointer has more elements
+        /// </summary>
+        /// <returns></returns>
         public bool Exist() { return current != tail; }
 
-        /// <summary>Grąžina dabartinį elementą.</summary>
+        /// <summary>
+        /// Returns current element
+        /// </summary>
+        /// <returns></returns>
         public T Get() { return current.Data; }
 
-        /// <summary>Grąžina pirmą elementą arba default jei tuščias.</summary>
+        /// <summary>
+        /// Returns the first element or blank if its missing
+        /// </summary>
+        /// <returns></returns>
         public T GetFirst()
         {
             return head.Link != tail ? head.Link.Data : default(T);
         }
 
-        /// <summary>Elementų skaičius.</summary>
+        /// <summary>
+        /// Returns the element count
+        /// </summary>
+        /// <returns></returns>
         public int Count()
         {
             int n = 0;
@@ -86,39 +97,54 @@ namespace Laboratorinis_3
             return n;
         }
 
-        /// <summary>Randa elementą pagal predikato sąlygą.</summary>
-        public T Find(Func<T, bool> predicate)
+        /// <summary>
+        /// Finds an element that matches condition
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public T Find(Func<T, bool> condition)
         {
             for (Begin(); Exist(); Next())
-                if (predicate(current.Data))
+            {
+                if (condition(current.Data))
+                {
                     return current.Data;
+                }
+            }
+
             return default(T);
         }
 
-        /// <summary>Tikrina ar sąrašas turi elementą tenkinantį predikato sąlygą.</summary>
-        public bool Contains(Func<T, bool> predicate)
+        /// <summary>
+        /// Checks if the list contains elements that matches condition
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public bool Contains(Func<T, bool> condition)
         {
-            return Find(predicate) != null;
+            return Find(condition) != null;
         }
 
-        // ── rūšiavimas (bubble sort naudojant IComparable) ─────────────
         /// <summary>
-        /// Rūšiuoja sąrašą naudojant nurodytą lygintoją.
-        /// Nereikalauja, kad T implementuotų IComparable — galima nurodyti bet kokį Comparison&lt;T&gt;.
+        /// Bubble sorts the list
         /// </summary>
+        /// <param name="comparison"></param>
         public void Sort(Comparison<T> comparison)
         {
             for (Node i = head.Link; i != tail; i = i.Link)
+            {
                 for (Node j = i.Link; j != tail; j = j.Link)
+                {
                     if (comparison(i.Data, j.Data) > 0)
                     {
                         T tmp = i.Data;
                         i.Data = j.Data;
                         j.Data = tmp;
                     }
+                }
+            }
         }
 
-        // ── IEnumerable<T> ─────────────────────────────────────────────
         public IEnumerator<T> GetEnumerator()
         {
             Node node = head.Link;
