@@ -11,6 +11,14 @@ namespace Laboratorinis_3
         public LList<City> Cities { get; private set; }
         public int TotalDistance { get; set; }
 
+        public LList<object> LList
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Blank constructor
         /// </summary>

@@ -11,8 +11,6 @@
 <body>
     <form id="form1" runat="server">
 
-
-        <!-- Pradiniai duomenys -->
         <div class="card">
             <div class="card-title">Pradiniai duomenys</div>
             <div class="grid-2">
@@ -62,7 +60,6 @@
             </div>
         </div>
 
-        <!-- Parametrai -->
         <div class="card">
             <div class="card-title">Parametrai</div>
             <div class="grid-4">

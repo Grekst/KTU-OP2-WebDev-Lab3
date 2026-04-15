@@ -12,6 +12,14 @@ namespace Laboratorinis_3
         public string Destination { get; private set; }
         public int Distance { get; set; }
 
+        public LList<object> LList
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Blank constructor
         /// </summary>

@@ -9,6 +9,38 @@ namespace Laboratorinis_3
 {
     public static class InOut
     {
+        public static Main Main
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public static Road Road
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public static Route Route
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public static City City
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Reads file data from path
         /// </summary>

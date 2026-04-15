@@ -156,5 +156,13 @@ namespace Laboratorinis_3
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public Main Main
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

@@ -7,8 +7,24 @@ namespace Laboratorinis_3
         public string Name { get; set; }
         public int Population { get; set; }
 
+        public LList<object> LList
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        /// <summary>
+        /// Blank constructor
+        /// </summary>
         public City() { Name = null; Population = 0; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="population"></param>
         public City(string name, int population)
         {
             Name = name;

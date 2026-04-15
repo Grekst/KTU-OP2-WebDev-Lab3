@@ -4,6 +4,14 @@ namespace Laboratorinis_3
 {
     public static class TaskUtils
     {
+        public static Main Main
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// A method used for finding all possible routes that match inputed criteria
         /// </summary>

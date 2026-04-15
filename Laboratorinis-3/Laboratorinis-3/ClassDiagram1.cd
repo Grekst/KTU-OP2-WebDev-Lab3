@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Laboratorinis_3.City">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAQMgAAAAAQAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>City\City.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LList" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Laboratorinis_3.InOut">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAIIAAAAAAQMIFyQgQAAAAAAxiIAAQAABAIIAAE=</HashCode>
+      <FileName>Other\InOut.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Main" />
+      <Property Name="Road" />
+      <Property Name="Route" />
+      <Property Name="City" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Laboratorinis_3.LList&lt;T&gt;">
+    <Position X="10.25" Y="4.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Laboratorinis_3.LList&lt;T&gt;.Node" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Other\LList.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgAIAAAAgAAAABBgAAAQEAQAiAAIEQAEAAAABwEQAgA=</HashCode>
+      <FileName>Other\LList.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Main" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Laboratorinis_3.Road">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAICAAAAQEgAAAAAAAAAAAAIBEAAAAAAAAAIA=</HashCode>
+      <FileName>Road\Road.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LList" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Laboratorinis_3.Route">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAIAAAIAAEEAAAAAAAAAAAAAAAAAAABAAAABA=</HashCode>
+      <FileName>Route\Route.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LList" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Laboratorinis_3.TaskUtils">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAEAFAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Other\TaskUtils.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Main" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Laboratorinis_3.Main">
+    <Position X="5.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAYAAAJEAAEAQJIkAIABAAIAAAEAADAA2EAAKABAA=</HashCode>
+      <FileName>Main.aspx.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LList" />
+      <Property Name="Road" />
+      <Property Name="Route" />
+      <Property Name="City" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

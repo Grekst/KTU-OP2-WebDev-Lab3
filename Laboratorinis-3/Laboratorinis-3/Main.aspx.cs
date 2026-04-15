@@ -8,6 +8,38 @@ namespace Laboratorinis_3
 {
     public partial class Main : Page
     {
+        public LList<object> LList
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Road Road
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Route Route
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public City City
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e) { }
 
         /// <summary>

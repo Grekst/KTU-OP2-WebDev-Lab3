@@ -246,7 +246,9 @@ namespace Laboratorinis_3.Tests
 
             List<string> result = new List<string>();
             foreach (City c in list)
+            {
                 result.Add(c.Name);
+            }
 
             CollectionAssert.AreEqual(new[] { "A", "B", "C" }, result);
         }
