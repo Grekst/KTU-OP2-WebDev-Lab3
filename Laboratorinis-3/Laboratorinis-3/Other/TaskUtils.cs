@@ -23,9 +23,7 @@ namespace Laboratorinis_3
             string unwantedCity)
         {
             LList<Route> results = new LList<Route>();
-            City startCity = allCities.Find(c => string.Equals(
-                                         c.Name, startCityName,
-                                         StringComparison.OrdinalIgnoreCase));
+            City startCity = allCities.Find(c => string.Equals(c.Name, startCityName, StringComparison.OrdinalIgnoreCase));
 
             if (startCity == null || startCity.Population >= maxPop || string.Equals(startCity.Name, unwantedCity, StringComparison.OrdinalIgnoreCase))
             {
@@ -39,6 +37,10 @@ namespace Laboratorinis_3
             return results;
         }
 
+        /// <summary>
+        /// Sorts routes by distance and alphabet if matching
+        /// </summary>
+        /// <param name="routes"></param>
         public static void SortRoutes(LList<Route> routes)
         {
             routes.Sort((a, b) =>
